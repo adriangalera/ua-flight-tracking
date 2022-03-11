@@ -1,0 +1,19 @@
+"3C656C", icao
+51.15, lat
+0.21, lng
+91, heading
+41000, altitude
+454, speed
+"2264", sqwack
+"T-EGTG171", ?
+"A333", aircraft-code
+"D-AIKL", registration
+1646918073, time
+"ORD", src
+"FRA", dst
+"LH1593", flight number
+0, on-ground
+0, vertical-speed
+"DLH1593", callsign
+0, ?
+"DLH", airline
