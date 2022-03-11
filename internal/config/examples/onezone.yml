@@ -1,0 +1,7 @@
+zones:
+  - name: test1
+    area:
+      lat1: 1
+      lng1: 2
+      lat2: 1
+      lng2: 2
