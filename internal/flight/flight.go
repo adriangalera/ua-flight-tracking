@@ -5,4 +5,5 @@ type Flight struct {
 	CallSign     string
 	AircraftType string
 	Airline      string
+	Link         string
 }
