@@ -60,16 +60,16 @@ func TestGetFlights(t *testing.T) {
 		Area: bounds,
 	}
 	flights := provider.GetFlights(testZone)
-	firstAircraft := flight.Flight{
+	firstFlight := flight.Flight{
 		Id:       "2b166e3c",
 		CallSign: "C25B",
 	}
-	lastAircraft := flight.Flight{
+	lastFlight := flight.Flight{
 		Id:       "2b16af97",
 		CallSign: "PHWMA",
 	}
-	assert.Equal(t, firstAircraft, flights[0], "First aircraft does not match expected")
-	assert.Equal(t, lastAircraft, flights[len(flights)-1], "Last aircraft does not match expected")
+	assert.Equal(t, firstFlight, flights[0], "First flight does not match expected")
+	assert.Equal(t, lastFlight, flights[len(flights)-1], "Last flight does not match expected")
 }
 
 

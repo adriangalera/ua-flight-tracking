@@ -1,4 +1,4 @@
-Feature: Aircraft
+Feature: Flights
 
   The flight tracking application will detect when a new plane enters or departs the zone
 

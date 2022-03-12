@@ -32,8 +32,8 @@ func TestGetFlights(t *testing.T) {
 		Id:       "1748215643",
 		CallSign: "FR3619",
 	}
-	assert.Equal(t, flight1, parsedFlights[0], "First aircraft does not match expected")
-	assert.Equal(t, flight2, parsedFlights[len(parsedFlights)-1], "Last aircraft does not match expected")
+	assert.Equal(t, flight1, parsedFlights[0], "First flight does not match expected")
+	assert.Equal(t, flight2, parsedFlights[len(parsedFlights)-1], "Last flight does not match expected")
 }
 
 func TestGetLink(t *testing.T) {
