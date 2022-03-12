@@ -72,7 +72,8 @@ func (m MilitaryFlightFilter) isMilitary(flight flight.Flight) bool {
 func (m MilitaryFlightFilter) Filter(flights []flight.Flight) []flight.Flight {
 	var militaryFlights []flight.Flight
 	for _, f := range flights {
-		if m.isMilitary(f) {
+		isMilitary := m.isMilitary(f)
+		if isMilitary {
 			militaryFlights = append(militaryFlights, f)
 		}
 	}

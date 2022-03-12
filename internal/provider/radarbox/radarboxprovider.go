@@ -7,6 +7,7 @@ import (
 	"agalera.eu/flight-tracking/internal/zone"
 	"fmt"
 	"github.com/tidwall/gjson"
+	"log"
 	"sort"
 )
 
@@ -20,12 +21,12 @@ func NewRadarBoxProvider(executor request.RequestExecutor) provider.DataProvider
 
 func headers() map[string]string {
 	return map[string]string{
-		"authority":  "data.rb24.com",
-		"accept":     "application/json, text/plain, */*",
-		"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36",
-		"origin" : "https://www.radarbox.com",
-		"referer" : "https://www.radarbox.com",
-		"accept-language" : "es,ca;q=0.9,en-GB;q=0.8,en-US;q=0.7,en;q=0.6",
+		"authority":       "data.rb24.com",
+		"accept":          "application/json, text/plain, */*",
+		"user-agent":      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36",
+		"origin":          "https://www.radarbox.com",
+		"referer":         "https://www.radarbox.com",
+		"accept-language": "es,ca;q=0.9,en-GB;q=0.8,en-US;q=0.7,en;q=0.6",
 	}
 }
 
@@ -42,6 +43,10 @@ func getFlightsUrl(bounds zone.Bounds) string {
 
 func parseFlightsResponse(body string) []flight.Flight {
 	rootElement := gjson.Get(body, "@this")
+	if !rootElement.Array()[0].Exists() {
+		log.Printf("Cannot parse radarboxprovider!. Received body: %s", body)
+		return []flight.Flight{}
+	}
 	flights := rootElement.Array()[0].Map()
 	flightIds := make([]string, 0, len(flights))
 	for flightId := range flights {
@@ -65,6 +70,7 @@ func getMoreDetailsUrl(flight flight.Flight) string {
 }
 
 func (r RadarboxProvider) GetFlights(zone zone.Zone) []flight.Flight {
+	log.Printf("Query radarbox for zone %s", zone.Name)
 	body := r.requestExecutor.Get(getFlightsUrl(zone.Area), headers())
 	return parseFlightsResponse(body)
 }

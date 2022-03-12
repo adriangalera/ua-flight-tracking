@@ -7,6 +7,7 @@ import (
 	"agalera.eu/flight-tracking/internal/zone"
 	"fmt"
 	"github.com/tidwall/gjson"
+	"log"
 )
 
 type FlightRadarProvider struct {
@@ -61,8 +62,8 @@ func parseMoreDetailsResponse(body string) flight.Flight {
 }
 
 func (f *FlightRadarProvider) GetFlights(zone zone.Zone) []flight.Flight {
+	log.Printf("Query flightradar for zone %s", zone.Name)
 	flightsUrl := getUrl(zone.Area)
-	//log.Printf("Querying flight radar for zone %s with query %s", zone.Name, flightsUrl)
 	body := f.requestExecutor.Get(flightsUrl, map[string]string{})
 	return parseFlightsResponse(body)
 }
